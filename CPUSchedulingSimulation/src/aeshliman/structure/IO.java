@@ -21,12 +21,19 @@ public class IO implements Device
 	// Operations
 	public boolean isEmpty()
 	{
-		return false;
+		return process==null;
+	}
+	
+	public CustomProcess removeProcess() // Returns the current process and empties the IO
+	{
+		CustomProcess temp = this.process;
+		this.process = null;
+		return temp;
 	}
 	
 	// toString
 	public String toString()
 	{
-		return "IO " + id + ": " + this.process.toString();
+		return "IO " + id + ":\n" + this.process;
 	}
 }

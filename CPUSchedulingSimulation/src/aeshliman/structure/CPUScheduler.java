@@ -31,9 +31,9 @@ public class CPUScheduler
 	public Queue<CustomProcess> getReadyQueue() { return this.readyQueue; }
 	
 	// Operations
-	public boolean cpuActive()
+	public boolean isActive()
 	{
-		return cpu.isEmpty();
+		return !cpu.isEmpty();
 	}
 	
 	public void resolveReadyQueueEvent()

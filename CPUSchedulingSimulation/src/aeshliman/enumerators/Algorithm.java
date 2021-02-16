@@ -30,8 +30,16 @@ public enum Algorithm
 				device.setProcess(process); // Places process into device
 				Event event;
 				// If device is IO creates IOEvent else CPU event
-				if(device instanceof IO) event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler());
-				else event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler());
+				if(device instanceof IO)
+				{
+					process.setState(State.WAITING);
+					event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
+				else
+				{
+					process.setState(State.RUNNING);
+					event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
 				sim.getEvents().add(event); // Adds event to priority queue
 			}
 		}
@@ -50,8 +58,16 @@ public enum Algorithm
 				device.setProcess(process); // Places process into device
 				Event event;
 				// If device is IO creates IOEvent else CPU event
-				if(device instanceof IO) event = new IOEvent(sim.getTime()+Math.min(process.peekBurstTime(),sim.getQuantum()),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler());
-				else event = new CPUEvent(sim.getTime()+Math.min(process.peekBurstTime(),sim.getQuantum()),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler());
+				if(device instanceof IO)
+				{
+					process.setState(State.WAITING);
+					event = new IOEvent(sim.getTime()+Math.min(process.peekBurstTime(),sim.getQuantum()),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler(),Math.min(process.peekBurstTime(),sim.getQuantum()));
+				}
+				else
+				{
+					process.setState(State.RUNNING);
+					event = new CPUEvent(sim.getTime()+Math.min(process.peekBurstTime(),sim.getQuantum()),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler(),Math.min(process.peekBurstTime(),sim.getQuantum()));
+				}
 				sim.getEvents().add(event); // Adds event to priority queue
 			}
 		}
@@ -70,8 +86,16 @@ public enum Algorithm
 				device.setProcess(process); // Places process into device
 				Event event;
 				// If device is IO creates IOEvent else CPU event
-				if(device instanceof IO) event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler());
-				else event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler());
+				if(device instanceof IO)
+				{
+					process.setState(State.WAITING);
+					event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
+				else
+				{
+					process.setState(State.RUNNING);
+					event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
 				sim.getEvents().add(event); // Adds event to priority queue
 			}
 		}
@@ -90,8 +114,16 @@ public enum Algorithm
 				device.setProcess(process); // Places process into device
 				Event event;
 				// If device is IO creates IOEvent else CPU event
-				if(device instanceof IO) event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler());
-				else event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler());
+				if(device instanceof IO)
+				{
+					process.setState(State.WAITING);
+					event = new IOEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getIO(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
+				else
+				{
+					process.setState(State.RUNNING);
+					event = new CPUEvent(sim.getTime()+process.peekBurstTime(),sim.getEvents(),sim.getCPU(),sim.getCPUScheduler(),sim.getIOScheduler(),process.peekBurstTime());
+				}
 				sim.getEvents().add(event); // Adds event to priority queue
 			}
 		}

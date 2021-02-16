@@ -1,11 +1,62 @@
+* means code is finished (including basic comments)
+** means comments are fully finished (including class data and description like last revision date
+
 Events
 	*Event
+		Parent class of all events. Provides time, events queue, and compareTo for all events
 	*CPUEvent
+		Triggers when CPU finishes. Correctly places process in next location
 	*IOEvent
+		Triggers when IO finishes. Correctly places process in next location
 	*ReadyQueueEvent
+		Triggers when CPU needs to be filled. Follows chosen algorithm
 	*WaitingQueueEvent
-	NewProcessEvent
+		Triggers when IO needs to be filled. Follows chosen algorithm
+	*NewProcessEvent
+		Triggers when a new process is added to a queue
 	ExitEvent
 	PrintEvent
 	PauseEvent
 	WaitEvent
+	*DebugEvent
+		Prints out information about the entire simulation and waits for user confirmation before continuing
+	
+Structure
+	*Device
+		Interface for CPU and IO methods
+	*CPU
+		Represents a CPU, works on a processes CPUBurst
+	*IO
+		Represents an IO, works on a processes IOBurst
+	*CPUScheduler
+		Handles the ReadyQueue and scheduling processes
+	*IOScheduler
+		Handles the WaitingQueue and scheduling processes
+	*CustomProcess
+		A process and all its information
+	*Simulation
+		The entire simulation and all the pieces. Polls through the events queue trigger each event
+
+Enumerators
+	*Algorithm
+		Defines the scheduling algorithm and contains the code for doing so
+	*State
+		Defines the possible states of a process
+
+Comparators
+	*SortByBurstTime
+		Sorts processes according to the length of the first burst short to long
+	*SortByPriority
+		Sorts processes according to their priority low to high (0 is low 9 is high)
+
+Bursts (May be redundant or unnecessary to have as subclasses)
+	*Burst
+		Contains the time of the burst
+	*CPUBurst
+		Defines a CPUBurst as opposed to IOBurst
+	*IOBurst
+		Defines a IOBurst as opposed to CPUBurst
+
+
+
+

@@ -40,4 +40,10 @@ public abstract class Event implements Comparable<Event>
 		if(this.time!=event.time) return this.time - event.time;
 		return this.id - event.id; // If both events share the same time sort by event creation order
 	}
+	
+	// toString
+	public String toString()
+	{
+		return "Event " + this.id + "  Event Type: " + this.getClass().getSimpleName() + "  Time: " + this.time;
+	}
 }

@@ -59,9 +59,9 @@ public class CustomProcess
 	// toString
 	public String toString()
 	{
-		String toString = "Name: " + name + " PID: " + pid + " State: " + state + " Priority: " + priority
-				+ "\n\tArrival Time: " + arrivalTime + " Finish Time: " + finishTime + " Turnaround Time: " + turnaroundTime;
-		for(Burst burst : bursts) toString += "\n\t" + burst.toString();
+		String toString = "Process Name: " + name + "  PID: " + pid + "  State: " + state;
+		int i = 0;
+		for(Burst burst : bursts) toString += "\nBurst " + i++ + ": " + burst;
 		return toString;
 	}
 }

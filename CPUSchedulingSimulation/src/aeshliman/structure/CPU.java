@@ -24,9 +24,16 @@ public class CPU implements Device
 		return process==null;
 	}
 	
+	public CustomProcess removeProcess() // Returns the current process and empties the CPU
+	{
+		CustomProcess temp = this.process;
+		this.process = null;
+		return temp;
+	}
+	
 	// toString
 	public String toString()
 	{
-		return "CPU " + id + ": " + this.process.toString();
+		return "CPU " + id + ":\n" + this.process;
 	}
 }

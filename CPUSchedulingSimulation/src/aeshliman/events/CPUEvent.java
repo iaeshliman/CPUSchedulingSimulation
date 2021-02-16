@@ -15,25 +15,27 @@ public class CPUEvent extends Event
 	private CPU cpu;
 	private CPUScheduler cpuScheduler;
 	private IOScheduler ioScheduler;
+	private int deltaTime;
 	
 	// Constructors
-	public CPUEvent(int time, PriorityQueue<Event> events, CPU cpu, CPUScheduler cpuScheduler, IOScheduler ioScheduler)
+	public CPUEvent(int time, PriorityQueue<Event> events, CPU cpu, CPUScheduler cpuScheduler, IOScheduler ioScheduler, int deltaTime)
 	{
 		super(time,events);
 		this.cpu = cpu;
 		this.cpuScheduler = cpuScheduler;
 		this.ioScheduler = ioScheduler;
+		this.deltaTime = deltaTime;
 	}
 	
 	// Operations
 	public int resolve()
 	{
 		// Local copies of process and active burst
-		CustomProcess process = cpu.getProcess();
+		CustomProcess process = cpu.removeProcess();
 		Burst burst = process.getBursts().peek();
 		
 		// Reduce the current burst time by time elapsed
-		burst.setTime(burst.getTime()-this.getTime());
+		burst.setTime(burst.getTime()-deltaTime);
 		if(burst.getTime()<=0) // Checks if burst is complete
 		{
 			// Remove burst from queue
@@ -44,7 +46,7 @@ public class CPUEvent extends Event
 				process.setState(State.WAITING);
 				ioScheduler.getWaitingQueue().add(process);
 				// If IO device is not active create a WaitingQueueEvent to fill device
-				if(!ioScheduler.ioActive()) this.getEvents().add(new WaitingQueueEvent(this.getTime(),this.getEvents(),ioScheduler));
+				if(!ioScheduler.isActive()) this.getEvents().add(new WaitingQueueEvent(this.getTime(),this.getEvents(),ioScheduler));
 			}
 		}
 		else // If not complete adds to ready queue
