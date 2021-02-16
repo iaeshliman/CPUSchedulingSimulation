@@ -1,0 +1,152 @@
+Class Structure
+	package.Events
+		- Event (Abstract)
+		- NewProcessEvent
+		- CPUEvent
+		- IOEvent
+		- ReadyQeueuEvent
+		- WaitQueueEvent
+		- WaitEvent
+		- PauseEvent
+		- ExitEvent
+	package.Bursts
+		- Burst (Abstract)
+		- CPUBurst
+		- IOBurst
+	package.Comparators
+		- SortByBurstTime
+		- SortByPriority
+	package.Structure
+		- Simluation
+		- CustomProcess
+		- CPU
+		- IO
+		- CPUScheduler
+		- IOScheduler
+	package.Enumerators
+		- Algorithm
+		- State
+
+How to handle immediate event triggers
+	maybe better to just trigger it immediately
+
+package.Events
+
+	Event
+		Local Data
+			- PriorityQueue
+			- Time
+
+	NewProcessEvent
+		Local Data
+			- Process
+			- CPUScheduler
+			- IOScheduler
+		Description
+			When a new process is created it is set to the NEW state and a NewProcessEvent is
+			created with a time equal to the processes arrival time.
+			When triggered, the process is added to the ready queue and a ReadyQueueEvent 
+			or a WaitQueueEvent is created with a time equal to current time.
+
+	CPUEvent
+		Local Data
+			- CPUScheduler
+			- IOScheduler
+		Description
+			When a CPU finshes running its active process, a CPUEvent is triggered.
+			When triggered, the CPU sends the process to the correct queue (ready vs waiting)
+			depending on if the processes CPUBurst was completed. A ReadyQueueEvent is
+			then triggered.
+
+	IOEvent
+		Local Data
+			- CPUScheduler
+			- IOScheduler
+		Description
+			When an IO finshes running its active process, an IOEvent is triggered.
+			When triggered, the IO sends the process to the correct queue (ready vs waiting)
+			depending on if the processes IOBurst was completed. A WaitQueueEvent is
+			then triggered.
+
+	ReadyQueueEvent
+		Local Data
+			- CPUScheduler
+		Description
+			When a CPU is empty and the ReadyQueue is not a ReadyQueueEvent is triggered.
+			When triggered, the IO is filled according to its algorithm. A CPUEvent is then
+			added to the PriorityQueue.
+
+	WaitQueueEvent
+		Local Data
+			- IOScheduler
+		Description
+			When an IO is empty and the WaitQueue is not a WaitQueueEvent is triggered.
+			When triggered, the IO is filled according to its algorithm. An IOEvent is then
+			added to the PriorityQueue.
+
+	WaitEvent
+		Local Data
+			- 
+		Description
+
+	PauseEvent
+		Local Data
+			- 
+		Description
+
+	ExitEvent
+		Local Data
+			- 
+		Description
+
+package.Bursts
+
+
+
+package.Comparators
+
+
+
+package.Structure
+
+	Simulation
+		Local Data
+			- CPU
+			- IO
+			- CPUScheduler
+			- IOScheduler
+			- LinkedList<CustomProcess>
+
+	CustomProcess
+		Local Data
+			- Many Things
+
+	CPU
+		Local Data
+			- Process
+
+	IO
+		Local Data
+			- Process
+
+	CPUScheduler
+		Local Data
+			- Simulation
+			- Algorithm
+			- CPU
+			- ReadyQueue<CustomProcess>
+		Description
+			Handles which process in the ReadyQueue is ran by the CPU and for how long.
+
+	IOScheduler
+		Local Data
+			- Simulation
+			- Algorithm
+			- IO
+			- WaitQueue<CustomProcess>
+		Description
+			Handles which process in the WaitQueue is ran by the IO and for how long.
+
+package.Enumerators
+
+
