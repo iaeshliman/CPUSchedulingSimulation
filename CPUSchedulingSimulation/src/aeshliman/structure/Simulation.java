@@ -8,6 +8,7 @@ import aeshliman.events.Event;
 
 public class Simulation
 {
+	// Instance Variables
 	private LinkedList<CustomProcess> processes;
 	private CPU cpu;
 	private IO io;
@@ -17,6 +18,7 @@ public class Simulation
 	private int quatum;
 	private int time;
 	
+	// Constructors
 	public Simulation(Algorithm algorithm, int quantum)
 	{
 		this.processes = new LinkedList<CustomProcess>();
@@ -29,6 +31,7 @@ public class Simulation
 		this.time = 0;
 	}
 	
+	// Getters
 	public LinkedList<CustomProcess> getProcesses() { return this.processes; }
 	public CPUScheduler getCPUScheduler() { return this.cpuScheduler; }
 	public IOScheduler getIOScheduler() { return this.ioScheduler; }
@@ -36,11 +39,7 @@ public class Simulation
 	public int getQuantum() { return this.quatum; }
 	public int getTime() { return this.time; }
 	
-	public void addEvent(Event event)
-	{
-		events.add(event);
-	}
-	
+	// Operations
 	public void run()
 	{
 		while(true)
@@ -51,5 +50,11 @@ public class Simulation
 				event.resolve();
 			}
 		}
+	}
+	
+	// toString
+	public String toString()
+	{
+		return null;
 	}
 }

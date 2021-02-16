@@ -45,6 +45,11 @@ public class CustomProcess
 	public void setTurnaroundTime(int turnaroundTime) { this.turnaroundTime = turnaroundTime; }
 	
 	// Operations
+	public Burst peekBurst()
+	{
+		return bursts.peek();
+	}
+	
 	public int peekBurstTime()
 	{
 		return bursts.peek().getTime();

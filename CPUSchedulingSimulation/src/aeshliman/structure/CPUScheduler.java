@@ -1,12 +1,8 @@
 package aeshliman.structure;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import aeshliman.comparators.SortByBurstTime;
-import aeshliman.comparators.SortByPriority;
+
 import aeshliman.enumerators.Algorithm;
-import aeshliman.events.CPUEvent;
 
 public class CPUScheduler
 {
@@ -24,9 +20,7 @@ public class CPUScheduler
 		this.algorithm = algorithm;
 		this.cpu = cpu;
 		this.quantum = quantum;
-		if(algorithm==Algorithm.SJF) this.readyQueue = new PriorityQueue<CustomProcess>(new SortByBurstTime());
-		else if(algorithm==Algorithm.PS) this.readyQueue = new PriorityQueue<CustomProcess>(new SortByPriority());
-		else this.readyQueue = new LinkedList<CustomProcess>();
+		this.readyQueue = this.algorithm.getQueue();
 	}
 	
 	// Getters
@@ -40,5 +34,13 @@ public class CPUScheduler
 	public void resolveReadyQueueEvent()
 	{
 		algorithm.algorithm(simulation,cpu,readyQueue);
+	}
+	
+	// toString
+	public String toString()
+	{
+		String toString = "Algorithm: " + algorithm + "\tQuantum Slice: " + quantum + cpu.toString();
+		for(CustomProcess process : readyQueue) toString += "\n" + process.toString();
+		return toString;
 	}
 }

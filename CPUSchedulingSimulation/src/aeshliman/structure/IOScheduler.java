@@ -1,11 +1,7 @@
 package aeshliman.structure;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
-import aeshliman.comparators.SortByBurstTime;
-import aeshliman.comparators.SortByPriority;
 import aeshliman.enumerators.Algorithm;
 
 public class IOScheduler
@@ -24,9 +20,7 @@ public class IOScheduler
 		this.algorithm = algorithm;
 		this.io = io;
 		this.quantum = quantum;
-		if(algorithm==Algorithm.SJF) this.waitingQueue = new PriorityQueue<CustomProcess>(new SortByBurstTime());
-		else if(algorithm==Algorithm.PS) this.waitingQueue = new PriorityQueue<CustomProcess>(new SortByPriority());
-		else this.waitingQueue = new LinkedList<CustomProcess>();
+		this.waitingQueue = this.algorithm.getQueue();
 	}
 	
 	// Getters
@@ -40,5 +34,13 @@ public class IOScheduler
 	public void resolveWaitingQueueEvent()
 	{
 		algorithm.algorithm(simulation,io,waitingQueue);
+	}
+	
+	// toString
+	public String toString()
+	{
+		String toString = "Algorithm: " + algorithm + "\tQuantum Slice: " + quantum + io.toString();
+		for(CustomProcess process : waitingQueue) toString += "\n" + process.toString();
+		return toString;
 	}
 }
