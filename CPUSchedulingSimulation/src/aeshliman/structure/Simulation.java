@@ -33,6 +33,8 @@ public class Simulation
 	
 	// Getters
 	public LinkedList<CustomProcess> getProcesses() { return this.processes; }
+	public CPU getCPU() { return this.cpu; }
+	public IO getIO() { return this.io; }
 	public CPUScheduler getCPUScheduler() { return this.cpuScheduler; }
 	public IOScheduler getIOScheduler() { return this.ioScheduler; }
 	public PriorityQueue<Event> getEvents() { return this.events; }

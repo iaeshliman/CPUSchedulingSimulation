@@ -41,6 +41,7 @@ public class CustomProcess
 	public Queue<Burst> getBursts() { return this.bursts; }
 	
 	// Setters
+	public void setState(State state) { this.state = state; }
 	public void setFinishTime(int finishTime) { this.finishTime = finishTime; }
 	public void setTurnaroundTime(int turnaroundTime) { this.turnaroundTime = turnaroundTime; }
 	

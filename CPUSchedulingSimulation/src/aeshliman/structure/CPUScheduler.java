@@ -28,9 +28,14 @@ public class CPUScheduler
 	public Algorithm getAlgorithm() { return this.algorithm; }
 	public CPU getCPU() { return this.cpu; }
 	public int getQuantum() { return this.quantum; }
-	public Queue<CustomProcess> getQueue() { return this.readyQueue; }
+	public Queue<CustomProcess> getReadyQueue() { return this.readyQueue; }
 	
 	// Operations
+	public boolean cpuActive()
+	{
+		return cpu.isEmpty();
+	}
+	
 	public void resolveReadyQueueEvent()
 	{
 		algorithm.algorithm(simulation,cpu,readyQueue);

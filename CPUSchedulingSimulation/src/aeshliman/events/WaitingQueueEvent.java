@@ -1,5 +1,7 @@
 package aeshliman.events;
 
+import java.util.PriorityQueue;
+
 import aeshliman.structure.IOScheduler;
 
 /*
@@ -12,19 +14,19 @@ import aeshliman.structure.IOScheduler;
 public class WaitingQueueEvent extends Event
 {
 	// Instance Variables
-	private IOScheduler ioscheduler;
+	private IOScheduler ioScheduler;
 	
 	// Constructors
-	public WaitingQueueEvent(int time, IOScheduler ioscheduler)
+	public WaitingQueueEvent(int time, PriorityQueue<Event> events, IOScheduler ioScheduler)
 	{
-		super(time);
-		this.ioscheduler = ioscheduler;
+		super(time,events);
+		this.ioScheduler = ioScheduler;
 	}
 	
 	// Operations
 	public int resolve()
 	{
-		ioscheduler.resolveWaitingQueueEvent();
+		ioScheduler.resolveWaitingQueueEvent();
 		return this.getTime();
 	}
 }

@@ -31,6 +31,11 @@ public class IOScheduler
 	public Queue<CustomProcess> getWaitingQueue() { return this.waitingQueue; }
 	
 	// Operations
+	public boolean ioActive()
+	{
+		return io.isEmpty();
+	}
+	
 	public void resolveWaitingQueueEvent()
 	{
 		algorithm.algorithm(simulation,io,waitingQueue);

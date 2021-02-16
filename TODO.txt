@@ -1,0 +1,11 @@
+Events
+	*Event
+	*CPUEvent
+	*IOEvent
+	*ReadyQueueEvent
+	*WaitingQueueEvent
+	NewProcessEvent
+	ExitEvent
+	PrintEvent
+	PauseEvent
+	WaitEvent
